@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Digital Academy Bootcamp - Hari 1</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --card-hover-bg: rgba(255, 255, 255, 0.04);
+            
+            /* Section specific gradients */
+            --grad-blue: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            --grad-green: linear-gradient(135deg, #10b981, #047857);
+            --grad-purple: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            --grad-orange: linear-gradient(135deg, #f59e0b, #b45309);
+            --grad-red: linear-gradient(135deg, #ef4444, #b91c1c);
+            --grad-teal: linear-gradient(135deg, #14b8a6, #0f766e);
+        }
+
+        body.light-mode {
+            --bg-dark: #f8fafc;
+            --bg-darker: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --card-hover-bg: rgba(0, 0, 0, 0.02);
+            --primary-light: #4f46e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-darker);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%),
+                radial-gradient(circle at 50% 60%, rgba(139, 92, 246, 0.1), transparent 30%),
+                radial-gradient(circle at 20% 90%, rgba(20, 184, 166, 0.1), transparent 25%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+
+        /* Light Mode Specific Adjustments */
+        body.light-mode .card code {
+            background: rgba(0, 0, 0, 0.05);
+            color: #4f46e5;
+        }
+        body.light-mode .header h1 {
+            background: linear-gradient(to right, #0f172a, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.light-mode .section-title h2,
+        body.light-mode .card h4,
+        body.light-mode .footer h3,
+        body.light-mode .trainer-name,
+        body.light-mode .agenda-title {
+            color: #0f172a !important;
+        }
+        body.light-mode .step-number {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.1);
+            color: var(--primary);
+        }
+        body.light-mode .icon {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .ambient-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .blob-1 {
+            top: -10%; left: -10%;
+            width: 40vw; height: 40vw;
+            background: rgba(79, 70, 229, 0.2);
+        }
+
+        .blob-2 {
+            bottom: -10%; right: -10%;
+            width: 30vw; height: 30vw;
+            background: rgba(131, 24, 67, 0.2);
+            animation-delay: -5s;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 30px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -1px;
+            transition: all 0.5s ease;
+        }
+
+        .header p {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .header .badge-tech {
+            margin-top: 20px;
+            display: inline-flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .section {
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4);
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        body.light-mode .section:hover {
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        body.light-mode .section-title {
+            border-bottom-color: rgba(0,0,0,0.05);
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #fff;
+            font-weight: 600;
+            transition: color 0.5s ease;
+        }
+
+        .icon {
+            width: 55px; height: 55px;
+            margin-right: 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center; justify-content: center;
+            font-size: 1.5rem; color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .icon-blue { background: var(--grad-blue); }
+        .icon-green { background: var(--grad-green); }
+        .icon-purple { background: var(--grad-purple); }
+        .icon-orange { background: var(--grad-orange); }
+        .icon-red { background: var(--grad-red); }
+        .icon-teal { background: var(--grad-teal); }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-hover-bg);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        
+        body.light-mode .card {
+            border-color: rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.1);
+            border-left-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        body.light-mode .card:hover {
+            background: rgba(0,0,0,0.04);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex; align-items: center; gap: 10px;
+            transition: color 0.5s ease;
+        }
+
+        .card p { color: var(--text-muted); font-size: 1rem; transition: color 0.5s ease; }
+        
+        .card ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            transition: color 0.5s ease;
+        }
+
+        .card code {
+            display: block;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            color: #a5b4fc; font-family: monospace; font-size: 0.9rem;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--secondary);
+        }
+
+        .highlight:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15));
+            border-left-color: #f472b6;
+        }
+
+        .step-number {
+            font-family: 'Outfit', sans-serif;
+            background: rgba(255,255,255,0.1);
+            color: var(--primary-light);
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.5s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        body.light-mode .theme-toggle {
+            color: #f59e0b; /* Sun color */
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--card-hover-bg);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        body.light-mode .footer {
+            border-top-color: rgba(0,0,0,0.05);
+        }
+
+        .footer h3 { font-size: 2rem; color: #fff; margin-bottom: 15px; transition: color 0.5s ease; }
+        .footer p { color: var(--text-muted); font-size: 1.1rem; transition: color 0.5s ease; }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-darker); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+        @media (max-width: 768px) {
+            .section { padding: 25px; }
+            .content-grid { grid-template-columns: 1fr; }
+            .header { padding: 40px 20px; }
+            .section-title h2 { font-size: 1.8rem; }
+            .theme-toggle { top: 10px; right: 10px; width: 40px; height: 40px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header glass-panel fade-in-up">
+            <h1>🚀 Fondasi Web Modern</h1>
+            <p>Bright Digital Academy Bootcamp: Junior Web Development - Hari Pertama</p>
+            
+            <div class="badge-tech">
+                <span style="background: rgba(255,45,32,0.15); color: #ff2d20; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(255,45,32,0.3);"><i class="fa-brands fa-laravel"></i> Laravel 13.x</span>
+                <span style="background: rgba(79,91,147,0.15); color: #8892BF; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(79,91,147,0.3);"><i class="fa-brands fa-php"></i> PHP 8.x</span>
+                <span style="background: rgba(0,117,143,0.15); color: #00758F; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(0,117,143,0.3);"><i class="fa-solid fa-database"></i> MySQL</span>
+                <span style="background: rgba(121,82,179,0.15); color: #7952b3; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(121,82,179,0.3);"><i class="fa-brands fa-bootstrap"></i> Bootstrap 5</span>
+            </div>
+            
+            <div class="skkni-badge" style="margin-top: 30px; background: rgba(255,255,255,0.05); padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: inline-block; text-align: left; max-width: 800px;">
+                <p style="color: var(--primary-light); font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">UNIT SKKNI YANG DICAKUP:</p>
+                <ul style="color: var(--text-muted); font-size: 0.85rem; padding-left: 20px; margin-bottom: 0;">
+                    <li>J.620100.011.01 — Melakukan Instalasi Software Tools Pemrograman</li>
+                    <li>J.620100.017.02 — Mengimplementasikan Pemrograman Terstruktur</li>
+                    <li>J.620100.004.02 — Menggunakan Struktur Data</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- Agenda Hari Ini -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-teal"><i class="fa-solid fa-list-check"></i></div>
+                <h2>Agenda Hari Ini</h2>
+            </div>
+            
+            <div class="content-grid" style="grid-template-columns: 1fr;">
+                <div class="card highlight" style="display: flex; flex-direction: row; align-items: flex-start; gap: 20px;">
+                    <div style="min-width: 150px;">
+                        <h4 style="margin-bottom: 5px;"><i class="fa-solid fa-book-open"></i> Sesi Materi</h4>
+                        <span style="background: rgba(99, 102, 241, 0.2); color: var(--primary-light); padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;">Durasi: 2 Jam</span>
+                    </div>
+                    <div>
+                        <p style="margin-top: 0; margin-bottom: 0;">Setup Lingkungan Developer Modern (VS Code, Composer, PHP, Git) & Fondasi PHP Terstruktur (Variabel, Tipe Data, Control Flow, Function, Laravel Collections/Array Methods, JSON).</p>
+                    </div>
+                </div>
+                
+                <div class="card" style="display: flex; flex-direction: row; align-items: flex-start; gap: 20px;">
+                    <div style="min-width: 150px;">
+                        <h4 style="margin-bottom: 5px;"><i class="fa-solid fa-laptop-code"></i> Sesi Praktek</h4>
+                        <span style="background: rgba(20, 184, 166, 0.2); color: #14b8a6; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;">Durasi: 2 Jam</span>
+                    </div>
+                    <div>
+                        <p style="margin-top: 0; margin-bottom: 0;">Instalasi Tools End-to-End & Setup Proyek Awal MVC. Melakukan inisiasi <em>database</em> proyek MVP "LaraStock" (Migration, Eloquent Model, Seeder, dan Controller perdana).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refreshment -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-blue"><i class="fa-solid fa-network-wired"></i></div>
+                <h2>Refreshment: Arsitektur Web Modern</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4><i class="fa-solid fa-laptop-code"></i> Analogi Restoran (Client-Server)</h4>
+                    <p><strong>Frontend (Ruang Makan):</strong> Area interaktif tempat tamu (user) memesan makanan via HTML/CSS/JS.<br>
+                    <strong>Backend (Dapur):</strong> Area belakang layar tempat koki (PHP/Laravel) memproses pesanan dan mengambil bahan dari gudang (MySQL).</p>
+                </div>
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-scale-balanced"></i> Mengapa Butuh Framework?</h4>
+                    <p>Membangun dengan <strong>PHP Native</strong> ibarat merakit rumah dari nol. Menggunakan <strong>Laravel</strong> ibarat membangun di atas fondasi solid berstandar industri dengan keamanan terjamin dan perlengkapan (*tools*) bawaan yang lengkap.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fondasi PHP Terstruktur -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-orange"><i class="fa-brands fa-php"></i></div>
+                <h2>Refreshment: Fondasi PHP Terstruktur</h2>
+            </div>
+            <p style="margin-bottom: 25px; font-size: 1.1rem; color: var(--text-main);">Sebelum menyelami Laravel, mari kita segarkan kembali (*refresh*) sintaks fundamental PHP yang akan sangat sering kita gunakan.</p>
+            
+            <div class="content-grid" style="grid-template-columns: 1fr;">
+                <div style="display: flex; flex-wrap: wrap; gap: 25px;">
+                    <div class="card" style="flex: 1 1 300px;">
+                        <h4><i class="fa-solid fa-cube"></i> Variabel & Tipe Data</h4>
+                        <p>Mendeklarasikan penyimpan data secara dinamis dan statis (PHP 8).</p>
+<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">&lt;?php
+$name = "Ahmad"; // String
+$age = 25;       // Integer
+$isActive = true; // Boolean
+$skills = ["PHP", "Laravel"]; // Array
+
+// Type Hinting (PHP 8+)
+function setAge(int $umur): void {
+    // Memaksa parameter harus angka bulat
+}</code></pre>
+                    </div>
+                    
+                    <div class="card" style="flex: 1 1 300px;">
+                        <h4><i class="fa-solid fa-code-branch"></i> Control Flow & Function</h4>
+                        <p>Pengambilan keputusan dan pengulangan proses logika bisnis.</p>
+<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">if ($age >= 18) {
+    echo "Dewasa";
+} else {
+    echo "Di bawah umur";
+}
+
+foreach ($skills as $skill) {
+    echo "Bisa: " . $skill;
+}
+
+function hitungDiskon(int $harga): float {
+    return $harga * 0.9;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-layer-group"></i> Laravel Collections & JSON</h4>
+                    <p>Metode modern mengolah <em>Array</em> ala Laravel (*Object-Oriented*). Sangat berguna saat menarik data dari database, lalu mengirimnya sebagai JSON ke Frontend.</p>
+<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">$products = collect([
+    ['id' => 1, 'name' => 'Laptop', 'price' => 15000000],
+    ['id' => 2, 'name' => 'Mouse', 'price' => 250000]
+]);
+
+// Manipulasi Array dengan mudah (filter harga di atas 1 juta)
+$mahal = $products->filter(fn($item) => $item['price'] > 1000000);
+
+// Konversi instan ke JSON untuk API Endpoint
+echo $mahal->toJson(); 
+// Hasil Output: [{"id":1,"name":"Laptop","price":15000000}]</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHP 8 & Composer -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-purple"><i class="fa-brands fa-php"></i></div>
+                <h2>Ekosistem PHP Modern & Composer</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-rocket"></i> Era Baru PHP 8.x</h4>
+                    <p>PHP bukan lagi sekadar bahasa skrip sederhana. Dengan fitur seperti <strong>JIT (Just In Time) Compiler</strong>, eksekusi kode menjadi sangat cepat. Pemahaman <em>Type Hinting</em> (mendeklarasikan tipe data parameter dan return value) wajib dikuasai untuk mencegah <em>bug</em> fatal.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-box-open"></i> Composer: Dependency Manager</h4>
+                    <p>Dalam web modern, kita tidak lagi menulis semuanya dari nol atau mengunduh pustaka secara manual (.zip). Composer bertindak sebagai manajer paket cerdas yang mengunduh, memperbarui, dan menautkan (autoload) ribuan pustaka (*library*) yang dibutuhkan aplikasi kita.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-file-lines"></i> File composer.json</h4>
+                    <p>Ibarat "resep masakan". File ini berisi daftar pustaka (dependencies) beserta versi spesifiknya. Jika proyek dipindahkan ke komputer lain, cukup jalankan <code>composer install</code>, maka seluruh lingkungan proyek akan direkonstruksi dengan sempurna.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Siklus Request Laravel -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-orange"><i class="fa-solid fa-route"></i></div>
+                <h2>Siklus Request (Lifecycle)</h2>
+            </div>
+            <div class="card highlight">
+                <h4><i class="fa-solid fa-arrow-right-arrow-left"></i> Bagaimana Laravel Merespons User?</h4>
+                <p>Saat pengguna mengakses sebuah URL, aplikasi tidak langsung merespons. Alur datanya adalah: <br>
+                <strong style="color:var(--primary-light); font-size: 1.1rem; display: block; margin-top: 10px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; text-align: center;">Browser ➔ Route (Pengarah) ➔ Controller (Otak) ➔ Model (Database) ➔ View (Tampilan) ➔ Browser</strong>
+                Pola pembagian tugas inilah yang secara formal disebut sebagai pola desain <strong>MVC</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Konsep MVC -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-purple"><i class="fa-solid fa-layer-group"></i></div>
+                <h2>Arsitektur Pola MVC</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4><i class="fa-solid fa-database"></i> Model (M)</h4>
+                    <p>Merepresentasikan struktur data dan logika bisnis aplikasi. Model bertanggung jawab langsung berinteraksi dengan <strong>Database</strong> untuk mengambil atau menyimpan informasi.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-desktop"></i> View (V)</h4>
+                    <p>Merepresentasikan antarmuka visual (UI). View bertugas menerima data dari Controller dan merendernya ke dalam format HTML yang akan ditampilkan ke layar pengguna.</p>
+                </div>
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-microchip"></i> Controller (C)</h4>
+                    <p>Bertindak sebagai "Otak" atau konduktor. Controller menerima <em>request</em> dari pengguna, meminta data dari Model, dan mengirimkannya ke View yang tepat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Anatomi & Artisan -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-teal"><i class="fa-solid fa-folder-tree"></i></div>
+                <h2>Anatomi Direktori & Artisan CLI</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4><i class="fa-solid fa-folder"></i> Struktur Folder Krusial</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><strong style="color:var(--primary-light)">app/</strong>: Jantung aplikasi (Controllers, Models).</li>
+                        <li><strong style="color:var(--primary-light)">routes/</strong>: Pintu masuk lalu lintas URL.</li>
+                        <li><strong style="color:var(--primary-light)">resources/</strong>: Tempat berkumpulnya *Views* (Blade).</li>
+                        <li><strong style="color:var(--primary-light)">database/</strong>: Skema migrasi dan data seeder.</li>
+                        <li><strong style="color:var(--primary-light)">public/</strong>: Titik akses (berisi index.php, CSS, JS).</li>
+                    </ul>
+                </div>
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-terminal"></i> Mengenal Artisan CLI</h4>
+                    <p>Artisan adalah Command Line Interface (CLI) bawaan Laravel. Alih-alih membuat file Controller secara manual dan mengatur *namespace*-nya, kita cukup memerintahkan Artisan untuk melakukannya (<em>Code Generation</em>).</p>
+                    <code>php artisan make:controller ItemController</code>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-bolt"></i> Kekuatan Otomatisasi</h4>
+                    <p>Selain *code generation*, Artisan bertugas mengeksekusi migrasi database (<code>migrate</code>), menjalankan server pengembangan lokal (<code>serve</code>), membersihkan cache (<code>cache:clear</code>), dan memantau antrean (<code>queue</code>).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Studi Kasus -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-orange"><i class="fa-solid fa-boxes-stacked"></i></div>
+                <h2>Studi Kasus: LaraStock MVP</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4><i class="fa-solid fa-bullseye"></i> Goal Pelatihan</h4>
+                            <p>Kita akan merealisasikan sebuah <strong>Minimum Viable Product (MVP)</strong> bernama <strong>LaraStock</strong>, sistem manajemen inventaris operasional untuk mendata sirkulasi barang di gudang. Fokus kita adalah mengimplementasikan fungsionalitas CRUD secara utuh dan aman.</p>
+                        </div>
+                        <a href="https://drawsql.app/" target="_blank" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-light); padding: 8px 15px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(99, 102, 241, 0.3); transition: all 0.3s ease; white-space: nowrap; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-diagram-project"></i> Rancang via DrawSQL
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-tags"></i> Tabel: Categories</h4>
+                    <p style="margin-bottom: 5px; font-size: 0.9rem;">Menyimpan klasifikasi barang.</p>
+                    <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                        <li><code>id</code> (PK, Auto Increment)</li>
+                        <li><code>name</code> (Varchar 100)</li>
+                        <li><code>description</code> (Text, Nullable)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-box"></i> Tabel: Products</h4>
+                    <p style="margin-bottom: 5px; font-size: 0.9rem;">Menyimpan master data barang (*One-to-Many* dari Kategori).</p>
+                    <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                        <li><code>id</code> (PK, Auto Increment)</li>
+                        <li><code>category_id</code> (Foreign Key)</li>
+                        <li><code>sku</code> (Varchar 50, Unique)</li>
+                        <li><code>name</code> (Varchar 255)</li>
+                        <li><code>stock</code> (Integer, Default 0)</li>
+                        <li><code>price</code> (BigInt)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-right-left"></i> Tabel: Transactions</h4>
+                    <p style="margin-bottom: 5px; font-size: 0.9rem;">Mencatat log arus barang masuk/keluar (*One-to-Many* dari Produk).</p>
+                    <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                        <li><code>id</code> (PK, Auto Increment)</li>
+                        <li><code>product_id</code> (Foreign Key)</li>
+                        <li><code>type</code> (Enum: 'in', 'out')</li>
+                        <li><code>quantity</code> (Integer Unsigned)</li>
+                        <li><code>notes</code> (Varchar 255, Nullable)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Praktik Sesi 1.1 -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-green"><i class="fa-solid fa-terminal"></i></div>
+                <h2>Sesi Praktik 1.1: Setup & Database Core</h2>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-main);">Mari kita mulai membangun pondasi aplikasi <strong>LaraStock</strong>. Ikuti langkah teknis di bawah ini secara berurutan.</p>
+
+            <div class="content-grid">
+                
+                <!-- Langkah 1 -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">1</span> Inisialisasi & Konfigurasi Lingkungan</h4>
+                    <p>Buka Terminal, buat proyek baru Laravel, lalu atur kredensial koneksi <em>database</em> MySQL di file <code>.env</code>.</p>
+                    <code>composer create-project laravel/laravel:^13.0 larastock<br>cd larastock</code>
+                    <p style="margin-top: 15px;">Edit file <code>.env</code> (Pastikan Anda sudah membuat <em>database</em> kosong bernama <code>larastock</code>):</p>
+                    <code>DB_CONNECTION=mysql<br>DB_HOST=127.0.0.1<br>DB_PORT=3306<br>DB_DATABASE=larastock<br>DB_USERNAME=root<br>DB_PASSWORD=</code>
+                </div>
+
+                <!-- Langkah 2 -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">2</span> Pembuatan Skema Database (Migration)</h4>
+                    <p>Kita akan merancang tabel <code>categories</code>, <code>products</code>, dan <code>transactions</code>.</p>
+                    <code>php artisan make:model Category -m<br>php artisan make:model Product -m<br>php artisan make:model Transaction -m</code>
+                    <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                        <div>
+                            <strong style="color: var(--primary-light);">_create_categories_table.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">Schema::create('categories', function (Blueprint $table) {
+    $table->id();
+    $table->string('name', 100);
+    $table->text('description')->nullable();
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-light);">_create_products_table.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    $table->string('sku', 50)->unique();
+    $table->string('name');
+    $table->integer('stock')->default(0);
+    $table->bigInteger('price');
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-light);">_create_transactions_table.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">Schema::create('transactions', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('product_id')->constrained()->onDelete('cascade');
+    $table->enum('type', ['in', 'out']);
+    $table->unsignedInteger('quantity');
+    $table->string('notes')->nullable();
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                    </div>
+                    <code style="margin-top: 15px;">php artisan migrate</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Praktik Sesi 1.2 -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-purple"><i class="fa-solid fa-code-branch"></i></div>
+                <h2>Sesi Praktik 1.2: Eloquent & Controller</h2>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-main);">Selanjutnya, kita akan merelasikan tabel yang sudah dibuat, mengisi data awal (seeding), dan membuat <em>endpoint</em> JSON pertama kita.</p>
+
+            <div class="content-grid">
+
+                <!-- Langkah 3 -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">3</span> Konfigurasi Model & Relasi (Eloquent)</h4>
+                    <p>Buka folder <code>app/Models</code>, tentukan atribut <em>Mass Assignment</em> dan relasinya.</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                        <div>
+                            <strong style="color: var(--primary-light);">Category.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">protected $fillable = ['name', 'description'];
+
+public function products() {
+    return $this->hasMany(Product::class);
+}</code></pre>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-light);">Product.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">protected $fillable = ['category_id', 'sku', 'name', 'stock', 'price'];
+
+public function category() {
+    return $this->belongsTo(Category::class);
+}
+public function transactions() {
+    return $this->hasMany(Transaction::class);
+}</code></pre>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-light);">Transaction.php</strong>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">protected $fillable = ['product_id', 'type', 'quantity', 'notes'];
+
+public function product() {
+    return $this->belongsTo(Product::class);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Langkah 4 -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">4</span> Mengisi Data Awal (Database Seeder)</h4>
+                    <p>Buka <code>database/seeders/DatabaseSeeder.php</code> untuk menyuntikkan data <em>dummy</em> agar tabel tidak kosong.</p>
+<pre style="margin:0;"><code style="white-space: pre-wrap;">public function run(): void {
+    $cat = Category::create(['name' => 'Elektronik']);
+    $prod = Product::create([
+        'category_id' => $cat->id,
+        'sku' => 'ELK-001',
+        'name' => 'Laptop Asus ROG',
+        'stock' => 15,
+        'price' => 15000000
+    ]);
+    
+    Transaction::create([
+        'product_id' => $prod->id,
+        'type' => 'in',
+        'quantity' => 15,
+        'notes' => 'Restock awal dari gudang pusat'
+    ]);
+}</code></pre>
+                    <code style="margin-top: 15px;">php artisan db:seed</code>
+                </div>
+
+                <!-- Langkah 5 -->
+                <div class="card" style="grid-column: 1 / -1; border-left-color: #10b981;">
+                    <h4><span class="step-number">5</span> Endpoint & Logika Pertama (Controller)</h4>
+                    <p>Buat rute percobaan untuk memastikan Model dan <em>Database</em> sudah terhubung sempurna.</p>
+                    <code>php artisan make:controller ProductController</code>
+<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">// Di ProductController.php
+public function index() {
+    return Product::with('category')->latest()->get();
+}
+
+// Di routes/web.php
+Route::get('/products', [ProductController::class, 'index']);</code></pre>
+                    <p style="margin-top: 15px;">Jalankan <code>php artisan serve</code> dan akses <strong>http://localhost:8000/products</strong> di peramban! <br><em>Catatan: Karena kita langsung me-return Model tanpa memanggil View (HTML), Laravel akan otomatis menyajikannya dalam format mentah <strong>JSON</strong> (biasa digunakan untuk API).</em></p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Praktik Sesi 1.3 -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-blue"><i class="fa-solid fa-chart-pie"></i></div>
+                <h2>Sesi Praktik 1.3: Advanced Controller (API Dashboard)</h2>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-main);">Mari demonstrasikan betapa saktinya <em>Eloquent</em> dan <em>Laravel Collections</em> dengan membuat <em>endpoint</em> untuk Dashboard Statistik Gudang.</p>
+
+            <div class="content-grid">
+                <!-- Langkah 6 -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">6</span> Endpoint Statistik Kompleks</h4>
+                    <p>Kita akan membuat rute baru yang menampilkan total nilai aset (Harga x Stok) dan daftar barang yang stoknya sudah menipis.</p>
+                    <code>php artisan make:controller DashboardController</code>
+<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">// Di DashboardController.php
+public function stats() {
+    $products = Product::all();
+    
+    // Menghitung total nilai aset dengan metode Collection sum()
+    $assetValue = $products->sum(function($prod) {
+        return $prod->price * $prod->stock;
+    });
+
+    // Mencari barang yang butuh restock (stock < 5) menggunakan filter()
+    $lowStock = $products->filter(fn($prod) => $prod->stock < 5)->values();
+
+    return response()->json([
+        'total_products' => $products->count(),
+        'total_asset_value' => $assetValue,
+        'low_stock_alerts' => $lowStock
+    ]);
+}
+
+// Di routes/web.php
+Route::get('/dashboard/stats', [DashboardController::class, 'stats']);</code></pre>
+                    <p style="margin-top: 15px;">Buka <strong>http://localhost:8000/dashboard/stats</strong> dan lihat bagaimana JSON yang dihasilkan sangat terstruktur!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ringkasan Hari 1 -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-teal"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h2>Ringkasan Hari 1</h2>
+            </div>
+            <div class="content-grid" style="grid-template-columns: 1fr;">
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-flag-checkered"></i> Apa Saja yang Telah Kita Capai?</h4>
+                    <p style="margin-top: 10px;">Selamat! Di hari pertama ini, kita telah berhasil membangun fondasi <em>backend</em> yang sangat kokoh untuk proyek LaraStock. Pencapaian Anda:</p>
+                    <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                        <li>Memahami konsep <strong>Arsitektur Client-Server</strong> dan siklus <em>Request</em> pada ekosistem <strong>MVC</strong>.</li>
+                        <li>Melakukan instalasi proyek <strong>Laravel 13</strong> dari nol menggunakan <em>Composer</em>.</li>
+                        <li>Merancang dan mengeksekusi <strong>3 Tabel Database</strong> (Categories, Products, Transactions) via sistem <em>Migration</em>.</li>
+                        <li>Membangun logika relasi antar tabel menggunakan <strong>Eloquent ORM</strong> (<code>hasMany</code> & <code>belongsTo</code>).</li>
+                        <li>Menyuntikkan data percobaan (*dummy data*) secara otomatis menggunakan <strong>Database Seeder</strong>.</li>
+                        <li>Membuat <strong>2 Endpoint API JSON</strong>, serta mengeksploitasi fungsi <strong>Laravel Collections</strong> (<code>sum</code>, <code>filter</code>) untuk kalkulasi statistik di Controller.</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: var(--primary-light); font-weight: 600;"><i class="fa-solid fa-forward-step"></i> Persiapkan diri Anda untuk Hari ke-2: Kita akan menyulap data JSON ini menjadi antarmuka visual yang menawan menggunakan Blade Templating dan Bootstrap 5!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer fade-in-up">
+            <h3>🎯 Siap Memulai?</h3>
+            <p>Pastikan environment laptop Anda sudah siap dengan PHP, Composer, dan Editor pilihan.</p>
+            <p style="margin-top: 15px; color: var(--primary-light);"><em>Let's write some elegant code! 💻✨</em></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const icon = themeToggleBtn.querySelector('i');
+            
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('bdemy-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                if (document.body.classList.contains('light-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('bdemy-theme', 'light');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('bdemy-theme', 'dark');
+                }
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bdemy Bootcamp - Hari 3</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --card-hover-bg: rgba(255, 255, 255, 0.04);
+            
+            --grad-blue: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            --grad-green: linear-gradient(135deg, #10b981, #047857);
+            --grad-purple: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            --grad-orange: linear-gradient(135deg, #f59e0b, #b45309);
+            --grad-red: linear-gradient(135deg, #ef4444, #b91c1c);
+            --grad-teal: linear-gradient(135deg, #14b8a6, #0f766e);
+        }
+
+        body.light-mode {
+            --bg-dark: #f8fafc;
+            --bg-darker: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --card-hover-bg: rgba(0, 0, 0, 0.02);
+            --primary-light: #4f46e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-darker);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%),
+                radial-gradient(circle at 50% 60%, rgba(139, 92, 246, 0.1), transparent 30%),
+                radial-gradient(circle at 20% 90%, rgba(20, 184, 166, 0.1), transparent 25%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+
+        /* Light Mode Specific Adjustments */
+        body.light-mode .card code { background: rgba(0, 0, 0, 0.05); color: #4f46e5; }
+        body.light-mode .header h1 {
+            background: linear-gradient(to right, #0f172a, #4f46e5);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        body.light-mode .section-title h2,
+        body.light-mode .card h4,
+        body.light-mode .footer h3,
+        body.light-mode .step-title { color: #0f172a !important; }
+        body.light-mode .step-number { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: var(--primary); }
+        body.light-mode .icon { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        body.light-mode .card.highlight { background: rgba(244, 114, 182, 0.05); }
+
+        .ambient-blob {
+            position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 40vw; height: 40vw; background: rgba(79, 70, 229, 0.2); }
+        .blob-2 { bottom: -10%; right: -10%; width: 30vw; height: 30vw; background: rgba(131, 24, 67, 0.2); animation-delay: -5s; animation-direction: alternate-reverse; }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .header { text-align: center; padding: 60px 30px; margin-bottom: 50px; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; font-weight: 700; letter-spacing: -1px; transition: all 0.5s ease;
+        }
+        .header p { color: var(--primary-light); font-size: 1.2rem; font-weight: 500; letter-spacing: 1px; }
+
+        .section { padding: 40px; margin-bottom: 40px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.5s ease; }
+        .section:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4); background: rgba(30, 41, 59, 0.7); }
+        body.light-mode .section:hover { border-color: rgba(0, 0, 0, 0.1); box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.15); background: rgba(255, 255, 255, 0.9); }
+
+        .section-title { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        body.light-mode .section-title { border-bottom-color: rgba(0,0,0,0.05); }
+        .section-title h2 { font-size: 2.2rem; color: #fff; font-weight: 600; transition: color 0.5s ease; }
+
+        .icon { width: 55px; height: 55px; margin-right: 20px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .icon-blue { background: var(--grad-blue); } .icon-green { background: var(--grad-green); } .icon-purple { background: var(--grad-purple); } .icon-orange { background: var(--grad-orange); } .icon-red { background: var(--grad-red); } .icon-teal { background: var(--grad-teal); }
+
+        .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        @media (max-width: 992px) { .content-grid { grid-template-columns: 1fr; } }
+
+        .card { background: var(--card-hover-bg); border-radius: 16px; padding: 25px; border: 1px solid rgba(255,255,255,0.03); border-left: 4px solid var(--primary); transition: all 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+        body.light-mode .card { border-color: rgba(0,0,0,0.05); }
+        .card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.1); border-left-color: var(--primary-light); transform: translateY(-3px); }
+        body.light-mode .card:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+        .card h4 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; transition: color 0.5s ease; }
+        .card p { color: var(--text-muted); font-size: 1rem; transition: color 0.5s ease; }
+        .card code { display: block; background: rgba(0,0,0,0.3); padding: 10px 15px; border-radius: 8px; margin: 10px 0; color: #a5b4fc; font-family: monospace; font-size: 0.9rem; transition: background 0.5s ease, color 0.5s ease; white-space: pre-wrap; word-break: break-all; }
+        .highlight { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1)); border-left: 4px solid var(--secondary); }
+
+        .step-number { font-family: 'Outfit', sans-serif; background: rgba(255,255,255,0.1); color: var(--primary-light); width: 35px; height: 35px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; border: 1px solid rgba(255,255,255,0.2); transition: all 0.5s ease; }
+
+        .theme-toggle { position: fixed; top: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); color: var(--text-main); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: var(--glass-shadow); transition: all 0.3s ease; outline: none; }
+        body.light-mode .theme-toggle { color: #f59e0b; }
+        .theme-toggle:hover { transform: scale(1.1); background: var(--card-hover-bg); }
+
+        .footer { text-align: center; padding: 50px 20px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
+        body.light-mode .footer { border-top-color: rgba(0,0,0,0.05); }
+        .footer h3 { font-size: 2rem; color: #fff; margin-bottom: 15px; transition: color 0.5s ease; }
+        .footer p { color: var(--text-muted); font-size: 1.1rem; transition: color 0.5s ease; }
+
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        .card code { position: relative; }
+        .copy-btn { position: absolute; top: 5px; right: 5px; background: rgba(255,255,255,0.1); border: none; border-radius: 4px; color: #fff; padding: 2px 8px; font-size: 0.7rem; cursor: pointer; opacity: 0; transition: opacity 0.3s; }
+        .card:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { background: var(--primary); }
+
+        ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--bg-darker); } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+        @media (max-width: 768px) { .section { padding: 25px; } .content-grid { grid-template-columns: 1fr; } .header { padding: 40px 20px; } .section-title h2 { font-size: 1.8rem; } .theme-toggle { top: 10px; right: 10px; width: 40px; height: 40px; font-size: 1.2rem; } }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header glass-panel fade-in-up">
+            <h1>🚀 Debugging & Documentation</h1>
+            <p>Bdemy Bootcamp: Junior Web Development - Hari Ketiga</p>
+            
+            <div class="badge-tech" style="margin-top: 20px; display: inline-flex; gap: 15px; justify-content: center;">
+                <span style="background: rgba(255,152,0,0.15); color: #FF9800; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(255,152,0,0.3);"><i class="fa-solid fa-bug"></i> Debugging Workflow</span>
+                <span style="background: rgba(139,92,246,0.15); color: #8B5CF6; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(139,92,246,0.3);"><i class="fa-solid fa-file-code"></i> PHPDoc Standard</span>
+                <span style="background: rgba(0,188,212,0.15); color: #00BCD4; padding: 5px 15px; border-radius: 20px; font-weight: 600; border: 1px solid rgba(0,188,212,0.3);"><i class="fa-solid fa-book"></i> README Documentation</span>
+            </div>
+
+            <div class="skkni-badge" style="margin-top: 30px; background: rgba(255,255,255,0.05); padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: inline-block; text-align: left; max-width: 800px; width: 100%;">
+                <p style="color: var(--primary-light); font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">UNIT SKKNI YANG DICAKUP:</p>
+                <ul style="color: var(--text-muted); font-size: 0.85rem; padding-left: 20px; margin-bottom: 15px;">
+                    <li>J.620100.025.02 — Melakukan Debugging</li>
+                    <li>J.620100.023.02 — Membuat Dokumen Kode Program</li>
+                </ul>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span style="background: rgba(99, 102, 241, 0.2); color: var(--primary-light); padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;"><i class="fa-solid fa-book-open"></i> Materi: 2 Jam</span>
+                    <span style="background: rgba(20, 184, 166, 0.2); color: #14b8a6; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;"><i class="fa-solid fa-laptop-code"></i> Praktek: 2 Jam</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesi 3.1: Melakukan Debugging (Deep Dive) -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-red"><i class="fa-solid fa-spider"></i></div>
+                <h2>Sesi 3.1: Melakukan Debugging (J.620100.025.02)</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Debugging bukan hanya mencari error, tapi memahami aliran logika program Anda.</p>
+            <div class="content-grid">
+                <!-- Teknik dd() -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-dumpster"></i> Teknik Dump & Die (dd)</h4>
+                    <p>Hentikan waktu! Bedah variabel di titik manapun untuk melihat isinya.</p>
+<pre style="margin-top:10px;"><code>// Bedah Request & User sekaligus
+dd($request->all(), auth()->user()); </code></pre>
+                </div>
+
+                <!-- Stack Trace -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-layer-group"></i> Membaca Stack Trace</h4>
+                    <p>Jangan panik saat melihat layar merah! Pelajari cara membaca urutan pemanggilan fungsi (Stack) untuk menemukan "Epicenter" dari sebuah error.</p>
+                </div>
+
+                <!-- Logic vs Syntax -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-brain"></i> Logic vs Syntax Error</h4>
+                    <p>Syntax error mudah ditemukan (program berhenti), namun **Logic Error** (data tidak sesuai ekspektasi) membutuhkan ketelitian tinggi dan penggunaan `dd()` yang strategis.</p>
+                </div>
+
+                <!-- Telescope -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-satellite"></i> Laravel Telescope</h4>
+                    <p>Dashboard monitoring untuk memantau Query Database yang lambat, Request, hingga Mail secara visual.</p>
+<pre style="margin-top:10px;"><code>composer require laravel/telescope --dev
+php artisan telescope:install
+php artisan migrate</code></pre>
+                </div>
+
+                <!-- Try Catch & DB Transaction -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><i class="fa-solid fa-shield-halved"></i> Error Handling & DB Transactions</h4>
+                    <p>Menjamin integritas data. Jika terjadi error di tengah proses, semua perubahan database akan dibatalkan (*Rollback*).</p>
+<pre style="margin-top:10px;"><code>use Illuminate\Support\Facades\DB;
+
+DB::beginTransaction();
+try {
+    $product->save();
+    // Simulasikan error di sini
+    DB::commit(); // Simpan permanen
+} catch (\Exception $e) {
+    DB::rollBack(); // Kembalikan data seperti semula
+    Log::error("Gagal simpan data: " . $e->getMessage());
+}</code></pre>
+                </div>
+
+                <!-- Tinker -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-terminal"></i> Advanced Tinker</h4>
+                    <p>Gunakan Tinker untuk mensimulasikan input tanpa Form. Sangat berguna untuk mengetes kueri Eloquent yang kompleks secara instan.</p>
+                    <code>php artisan tinker</code>
+                </div>
+
+                <!-- Logging -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-list-check"></i> Custom Logging</h4>
+                    <p>Gunakan `Log::debug()` untuk mencatat variabel saat aplikasi berjalan di background tanpa menghentikan eksekusi.</p>
+                    <code>Log::channel('single')->info('User Login: ', ['id' => $user->id]);</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesi 3.2: Membuat Dokumen Kode Program (Advanced) -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-blue"><i class="fa-solid fa-book-open-reader"></i></div>
+                <h2>Sesi 3.2: Dokumentasi Program (J.620100.023.02)</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Dokumentasi yang baik adalah hadiah untuk diri Anda di masa depan.</p>
+            <div class="content-grid">
+                <!-- PHPDoc -->
+                <div class="card highlight">
+                    <h4><i class="fa-brands fa-php"></i> PHPDoc & Type Hinting</h4>
+                    <p>Gunakan kekuatan PHP 8.x untuk mendokumentasikan tipe data secara eksplisit.</p>
+<pre style="margin-top:10px;"><code>/**
+ * @param Product $product
+ * @return void
+ */
+public function update(ProductRequest $request, Product $product): void { ... }</code></pre>
+                </div>
+
+                <!-- Meaningful Names -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-code"></i> Self-Documenting Code</h4>
+                    <p>Tulis kode yang "berbicara". Jika nama variabel Anda sudah jelas, komentar panjang lebar tidak lagi diperlukan.</p>
+<pre style="margin-top:10px;"><code>$expiredProducts = Product::where('exp_date', '<', now())->get();</code></pre>
+                </div>
+
+                <!-- README Structure (Full Detail) -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><i class="fa-solid fa-file-lines"></i> Professional README Documentation</h4>
+                    <p>File <code>README.md</code> adalah "brosur" proyek Anda. Dokumentasi yang lengkap mencakup identitas proyek, teknologi, cara instalasi, hingga panduan penggunaan.</p>
+<pre style="margin-top:10px;"><code># 📦 LaraStock: Inventory Management MVP
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Laravel Version](https://img.shields.io/badge/laravel-13.x-red)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+Sistem inventaris stok barang gudang yang dibangun dengan fokus pada efisiensi dan integritas data.
+
+### 🛠 Tech Stack
+- **Framework:** Laravel 13.x
+- **Database:** MySQL / PostgreSQL
+- **UI:** Bootstrap 5 + SweetAlert2
+- **Tools:** Telescope, Git
+
+### 🚀 Fitur Utama
+- [x] CRUD Produk & Kategori
+- [x] Validasi FormRequest & Transactional DB
+- [x] Search & Pagination
+- [x] Debugging Terintegrasi (Telescope)
+
+### ⚙️ Cara Instalasi
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com/user/larastock.git
+   composer install
+   ```
+2. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+3. **Database Migration**
+   ```bash
+   php artisan migrate --seed
+   ```
+4. **Run Application**
+   ```bash
+   php artisan serve
+   ```
+
+### 📄 Lisensi
+Distributed under the MIT License. See `LICENSE` for more information.</code></pre>
+                </div>
+
+                <!-- Property Docs -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-tags"></i> Property & Class Docs</h4>
+                    <p>Membantu IDE mengenali atribut model untuk fitur *Autocomplete*.</p>
+<pre style="margin-top:10px;"><code>/**
+ * @property string $sku
+ * @property int $stock
+ */</code></pre>
+                </div>
+
+                <!-- SemVer -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-code-branch"></i> Versioning (SemVer)</h4>
+                    <p>Standar penomoran: **Mayor.Minor.Patch** (Contoh: v1.1.0).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolaborasi Git -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-orange"><i class="fa-brands fa-git-alt"></i></div>
+                <h2>Manajemen Versi dengan Git</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4><i class="fa-solid fa-code-commit"></i> Track Record History</h4>
+                    <p>Git menyimpan jejak setiap perubahan kode secara permanen. Jika suatu saat rilis terbaru mengalami kerusakan fatal (sistem <em>down</em>), kita bisa mengembalikan kode ke kondisi sehat sebelumnya (<em>rollback</em>) dalam hitungan detik.</p>
+                </div>
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-code-branch"></i> Git Workflow Dasar</h4>
+                    <p style="margin-top: 10px;">
+                        <strong style="color:var(--primary-light)">git add .</strong> - Memasukkan perubahan ke tahap *staging*.<br>
+                        <strong style="color:var(--primary-light)">git commit -m "Pesan"</strong> - Menyimpan *snapshot* kode beserta deskripsinya.<br>
+                        <strong style="color:var(--primary-light)">git push</strong> - Mengirimkan *snapshot* ke repositori jarak jauh (GitHub/GitLab).
+                    </p>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-code-merge"></i> Git Branching</h4>
+                    <p>Memungkinkan pengembang mengisolasi eksperimen fitur baru ke jalurnya sendiri tanpa mengganggu kode sumber utama (<em>main/master</em>). Jika eksperimen tersebut gagal, branch tersebut dapat dibuang tanpa memberikan efek samping pada aplikasi.</p>
+                </div>
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><i class="fa-brands fa-github"></i> Publikasi ke GitHub (Cloud Repository)</h4>
+                    <p>Git adalah alat lokal di komputer Anda, sedangkan <strong>GitHub</strong> adalah platform <em>cloud</em> terpopuler untuk menyimpan source code, memamerkan portofolio, dan berkolaborasi jarak jauh. Meng-upload proyek (LaraStock) ke GitHub adalah langkah wajib bagi seorang <em>Web Developer</em> agar karya Anda bisa dinilai oleh calon perekrut (HRD).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Praktik Sesi 3 -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-green"><i class="fa-solid fa-flag-checkered"></i></div>
+                <h2>Praktik Inti: Debugging & Dokumentasi</h2>
+            </div>
+            <div class="content-grid">
+                <!-- Step 1: Debugging -->
+                <div class="card highlight">
+                    <h4><span class="step-number">1</span> Skenario: Perbaikan Bug (Debugging)</h4>
+                    <p>Peserta diminta untuk sengaja merusak kueri di Controller, lalu menggunakan <code>dd()</code> dan <strong>Tinker</strong> untuk melacak di mana letak kesalahannya.</p>
+<pre style="margin-top:10px;"><code>// Gunakan Tinker untuk cek data di terminal
+php artisan tinker
+>>> $p = App\Models\Product::first();
+>>> $p->name;</code></pre>
+                </div>
+
+                <!-- Step 2: PHPDoc -->
+                <div class="card">
+                    <h4><span class="step-number">2</span> Implementasi PHPDoc</h4>
+                    <p>Lengkapi semua <em>method</em> di <code>ProductController</code> dengan blok dokumentasi standar industri.</p>
+<pre style="margin-top:10px;"><code>/**
+ * @return \Illuminate\Http\Response
+ */</code></pre>
+                </div>
+
+                <!-- Step 3: README -->
+                <div class="card">
+                    <h4><span class="step-number">3</span> Dokumentasi README.md</h4>
+                    <p>Buat file <code>README.md</code> di root folder proyek yang berisi:</p>
+                    <ul style="font-size: 0.9rem; padding-left: 20px; color: var(--text-muted);">
+                        <li>Judul Proyek: LaraStock MVP</li>
+                        <li>Langkah Instalasi (Composer install, key generate)</li>
+                        <li>Daftar Fitur CRUD</li>
+                    </ul>
+                </div>
+
+                <!-- Step 4: Case Study -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">4</span> Studi Kasus: Hunt the Silent Bug</h4>
+                    <p>Coba temukan dan perbaiki kode di bawah ini yang tidak memunculkan error tapi datanya salah (Logic Error). Gunakan `dd()` untuk melacaknya!</p>
+<pre style="margin-top:10px;"><code>// Bug: Stok tidak berkurang saat barang keluar
+public function reduceStock($id, $qty) {
+    $product = Product::find($id);
+    // Ada yang salah di baris ini?
+    $product->stock = $product->stock + $qty; 
+    $product->save();
+}</code></pre>
+                </div>
+
+                <!-- Step 5: Final Push -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">5</span> Finalisasi & Version Control</h4>
+                    <p>Lakukan commit terakhir dengan pesan yang mengikuti standar **Conventional Commits** (feat:, docs:, fix:).</p>
+<pre style="margin-top:10px;"><code>git add .
+git commit -m "docs: implement phpdoc and professional readme"
+git push origin main</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kesimpulan Bootcamp -->
+        <div class="section glass-panel fade-in-up" style="border: 2px solid var(--primary); box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);">
+            <div class="section-title">
+                <div class="icon icon-blue"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h2>Kesimpulan Pelatihan (Wrap-Up)</h2>
+            </div>
+            <p style="font-size: 1.1rem; margin-bottom: 25px; color: var(--text-main); line-height: 1.8;">Dalam 3 hari pelatihan intensif (12 Jam) berbasis <strong>SKKNI</strong> ini, Anda telah melewati transformasi luar biasa dari sekadar mengenal kode hingga mampu mensimulasikan alur kerja seorang <em>Junior Web Developer</em> profesional:</p>
+            
+            <div class="content-grid" style="grid-template-columns: 1fr;">
+                <div class="card" style="border-left-color: #3b82f6;">
+                    <h4 style="color: #3b82f6;"><i class="fa-regular fa-calendar-check"></i> Hari 1: Fondasi Kuat</h4>
+                    <p style="margin:0;">Anda berhasil mengonfigurasi lingkungan <em>server-side</em> modern (<strong>PHP 8, Composer, Laravel</strong>), merancang struktur data MySQL yang aman, serta memahami anatomi arsitektur <em>Model-View-Controller</em> (MVC).</p>
+                </div>
+                <div class="card highlight" style="border-left-color: #ec4899;">
+                    <h4 style="color: #ec4899;"><i class="fa-regular fa-calendar-check"></i> Hari 2: Membangun Fungsionalitas</h4>
+                    <p style="margin:0;">Anda merakit antarmuka responsif dengan <strong>Blade & Bootstrap 5</strong>, mengelola <em>database</em> dengan <strong>Eloquent ORM</strong>, serta mengimplementasikan <em>Clean Code Guidelines</em> melalui validasi sistem dan pencegahan celah keamanan (CSRF/XSS).</p>
+                </div>
+                <div class="card" style="border-left-color: #10b981;">
+                    <h4 style="color: #10b981;"><i class="fa-regular fa-calendar-check"></i> Hari 3: Alur Kerja Profesional</h4>
+                    <p style="margin:0;">Anda menyempurnakan kualitas kode melalui teknik <strong>Professional Debugging</strong> (Tinker & dd), mendokumentasikan sistem dengan standar <strong>PHPDoc</strong>, serta mengamankan sejarah proyek di <strong>GitHub</strong> lengkap dengan file <strong>README</strong> profesional.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center; padding: 20px; background: rgba(99, 102, 241, 0.1); border-radius: 12px; border: 1px dashed var(--primary-light);">
+                <p style="font-size: 1.15rem; color: var(--text-main); font-weight: 500; margin: 0;"><em>"Kode yang Anda tulis hari ini adalah portofolio berharga untuk karier Anda esok hari."</em></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer fade-in-up">
+            <h3>🏆 Garis Akhir Bootcamp</h3>
+            <p>Selamat! Anda telah memahami keseluruhan siklus pengelolaan proyek web aplikasi modern.</p>
+            <p style="margin-top: 15px; color: var(--primary-light);"><em>Your journey as a Web Engineer has just begun! 🚀💻</em></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const icon = themeToggleBtn.querySelector('i');
+            
+            const savedTheme = localStorage.getItem('bdemy-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                if (document.body.classList.contains('light-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('bdemy-theme', 'light');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('bdemy-theme', 'dark');
+                }
+            });
+
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+            // Injeksi tombol Copy ke semua block code
+            document.querySelectorAll('code').forEach(codeBlock => {
+                const btn = document.createElement('button');
+                btn.className = 'copy-btn';
+                btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                
+                btn.addEventListener('click', () => {
+                    const text = codeBlock.innerText.replace(' Copy', '');
+                    navigator.clipboard.writeText(text).then(() => {
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                        setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy', 2000);
+                    });
+                });
+                
+                if (codeBlock.parentNode.tagName === 'PRE' || codeBlock.classList.contains('hljs') || codeBlock.innerText.length > 20) {
+                    codeBlock.style.position = 'relative';
+                    codeBlock.appendChild(btn);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
