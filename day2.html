@@ -208,7 +208,7 @@
                     <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 20px;">
                         <li><strong>Project Init:</strong> Instalasi Laravel 13 project "LaraStock".</li>
                         <li><strong>DB Connection:</strong> Konfigurasi database MySQL melalui file <code>.env</code>.</li>
-                        <li><strong>Migration & Seeder:</strong> Membuat tabel <code>items</code> dan data dummy awal.</li>
+                        <li><strong>Migration & Seeder:</strong> Membuat tabel <code>categories, products, & transactions</code> serta data dummy.</li>
                         <li><strong>Routing & Controller:</strong> Menampilkan data mentah JSON dari database ke browser.</li>
                     </ul>
                 </div>
@@ -361,8 +361,8 @@
     &lt;span class="text-danger"&gt;Stok Tipis!&lt;/span&gt;
 @endif
 
-@forelse($items as $item)
-    &lt;li&gt;{{ $item->name }}&lt;/li&gt;
+@forelse($products as $product)
+    &lt;li&gt;{{ $product->name }}&lt;/li&gt;
 @empty
     &lt;p&gt;Tidak ada data barang.&lt;/p&gt;
 @endforelse
@@ -385,11 +385,11 @@
                 </div>
                 <div class="card">
                     <h4><i class="fa-solid fa-repeat"></i> Perulangan Data Dinamis</h4>
-                    <p>Menggunakan direktif <code>@foreach($items as $item)</code> untuk memproses sekumpulan data secara otomatis. Sistem akan mencetak baris tabel (<code>&lt;tr&gt;</code>) sebanyak jumlah entri barang yang ada di database.</p>
+                    <p>Menggunakan direktif <code>@foreach($products as $product)</code> untuk memproses sekumpulan data secara otomatis. Sistem akan mencetak baris tabel (<code>&lt;tr&gt;</code>) sebanyak jumlah entri barang yang ada di database.</p>
                 </div>
                 <div class="card">
                     <h4><i class="fa-solid fa-tag"></i> Sintaks Echo Blade</h4>
-                    <p>Untuk mencetak isi variabel atau properti data ke layar, Blade menyediakan sintaks kurung kurawal ganda yang elegan dan aman dari serangan skrip silang: <code>{{ $item->name }}</code>.</p>
+                    <p>Untuk mencetak isi variabel atau properti data ke layar, Blade menyediakan sintaks kurung kurawal ganda yang elegan dan aman dari serangan skrip silang: <code>{{ $product->name }}</code>.</p>
                 </div>
                 <div class="card highlight">
                     <h4><i class="fa-solid fa-file-lines"></i> Pagination (Halaman)</h4>

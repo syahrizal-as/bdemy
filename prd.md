@@ -17,15 +17,12 @@ Program pelatihan intensif selama 3 hari ini dirancang untuk menjembatani pesert
 ---
 
 ## 2. Definisi Studi Kasus: LaraStock (MVP)
-Peserta akan membangun **LaraStock**, sebuah aplikasi sistem manajemen inventaris untuk mencatat arus barang di gudang. Fokus utama MVP ini adalah penyelesaian modul CRUD (Create, Read, Update, Delete) pada Master Barang.
+Peserta akan membangun **LaraStock**, sebuah aplikasi sistem manajemen inventaris untuk mencatat arus barang di gudang. Fokus utama MVP ini adalah penyelesaian modul CRUD (Create, Read, Update, Delete) pada Master Produk.
 
-**Struktur Database Tabel `items`:**
-*   `id` (Primary Key, Auto Increment)
-*   `name` (String, max: 255) - Nama barang.
-*   `category` (String, max: 100) - Kategori barang (Elektronik, ATK, dsb).
-*   `quantity` (Integer) - Jumlah stok barang saat ini.
-*   `status` (Boolean/Enum) - Status ketersediaan (Tersedia / Habis).
-*   `timestamps` (created_at, updated_at).
+**Struktur Database Utama:**
+*   **Tabel `categories`**: `id`, `name`, `description`.
+*   **Tabel `products`**: `id`, `category_id`, `sku`, `name`, `stock`, `price`.
+*   **Tabel `transactions`**: `id`, `product_id`, `type`, `quantity`, `notes`.
 
 ---
 
