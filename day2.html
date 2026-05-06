@@ -793,6 +793,38 @@ function deleteProduct(id, name) {
             </div>
         </div>
 
+        <!-- Reporting System -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-orange"><i class="fa-solid fa-file-export"></i></div>
+                <h2>Sesi Praktik 2.7: Reporting System (PDF & Excel)</h2>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-main);">Mengintegrasikan library pihak ketiga untuk mencetak laporan inventaris barang secara profesional.</p>
+            <div class="content-grid">
+                <!-- PDF Export -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-file-pdf"></i> Export PDF (DomPDF)</h4>
+                    <p>Mengonversi tampilan Blade menjadi dokumen PDF siap cetak.</p>
+                    <code style="margin-top: 5px;">composer require barryvdh/laravel-dompdf</code>
+<pre style="margin-top: 10px;"><code>public function downloadPDF() {
+    $data = Product::all();
+    $pdf = Pdf::loadView('report.pdf', compact('data'));
+    return $pdf->download('laporan-stok.pdf');
+}</code></pre>
+                </div>
+
+                <!-- Excel Export -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-file-excel"></i> Export Excel (Maatwebsite)</h4>
+                    <p>Memindahkan data database ke spreadsheet Excel dengan satu klik.</p>
+                    <code style="margin-top: 5px;">composer require maatwebsite/excel</code>
+<pre style="margin-top: 10px;"><code>public function downloadExcel() {
+    return Excel::download(new ProductExport, 'stok.xlsx');
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
         <!-- Ringkasan Hari 2 -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
