@@ -369,35 +369,47 @@
             </div>
         </div>
 
-        <!-- Create Data -->
+        <!-- Deep Dive: UX & Data Handling -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
-                <div class="icon icon-orange"><i class="fa-solid fa-keyboard"></i></div>
-                <h2>Form Input & Validasi (Create)</h2>
+                <div class="icon icon-purple"><i class="fa-solid fa-microchip"></i></div>
+                <h2>Deep Dive: UX & Data Handling</h2>
             </div>
             <div class="content-grid">
+                <!-- Persistensi Form -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-clock-rotate-left"></i> Persistensi Input (old)</h4>
+                    <p>Sangat menyebalkan bagi user jika form kosong kembali setelah ada error validasi. Gunakan helper <code>old()</code> untuk menjaga input tetap ada.</p>
+<pre style="margin-top: 10px;"><code>&lt;input type="text" name="name" 
+       value="{{ old('name') }}"&gt;</code></pre>
+                </div>
+
+                <!-- Menampilkan Relasi -->
                 <div class="card">
-                    <h4><i class="fa-solid fa-shield-halved"></i> Proteksi CSRF Token</h4>
-                    <p>Keamanan form tingkat tinggi. Setiap formulir Laravel diwajibkan menyertakan token unik (<code>@csrf</code>) untuk memblokir serangan <em>Cross-Site Request Forgery</em>.</p>
-<pre style="margin-top: 10px;"><code style="white-space: pre-wrap;">&lt;form action="..." method="POST"&gt;
-    @csrf
-    &lt;!-- Input lainnya --&gt;
-&lt;/form&gt;</code></pre>
+                    <h4><i class="fa-solid fa-diagram-project"></i> Menampilkan Relasi</h4>
+                    <p>Jangan tampilkan <code>category_id</code> (angka) di tabel. Gunakan kekuatan Eloquent untuk memanggil nama kategori melalui relasi.</p>
+<pre style="margin-top: 10px;"><code>{{-- Di tabel produk --}}
+{{ $product->category->name }}</code></pre>
                 </div>
+
+                <!-- Active State -->
                 <div class="card">
-                    <h4><i class="fa-solid fa-bug-slash"></i> Pencegahan XSS</h4>
-                    <p>Sintaks echo <code>{{ }}</code> milik Blade otomatis menjalankan <code>htmlspecialchars()</code> untuk membuang tag <em>script</em> berbahaya (*Cross-Site Scripting*).</p>
-<pre style="margin-top: 10px;"><code>// Input: &lt;script&gt;alert('hacked')&lt;/script&gt;
-// Output Blade: {{ $input }}
-// Hasil: &amp;lt;script&amp;gt;... (Teks Biasa) ✅</code></pre>
+                    <h4><i class="fa-solid fa-lightbulb"></i> Navigasi Aktif</h4>
+                    <p>Gunakan helper <code>Request::is()</code> untuk memberikan class <code>active</code> pada navbar agar user tahu mereka sedang di halaman mana.</p>
+<pre style="margin-top: 10px;"><code>&lt;a class="nav-link {{ Request::is('products*') ? 'active' : '' }}"&gt;</code></pre>
                 </div>
-                <div class="card highlight" style="grid-column: 1 / -1;">
-                    <h4><i class="fa-solid fa-filter"></i> Validasi Request & Prinsip Clean Code</h4>
-                    <p>Menerapkan syarat input ketat (harus angka, wajib diisi) untuk melindungi database. Sesuai <em>best practices</em> dan <strong>Clean Code Guidelines (DRY, KISS)</strong>, logika validasi ini tidak boleh menumpuk di Controller, melainkan dipisah ke dalam kelas <em>Form Request</em> khusus. Kita juga akan menyinggung penggunaan <em>Laravel Pint</em> untuk format kode standar.</p>
-                </div>
-                <div class="card" style="grid-column: 1 / -1;">
-                    <h4><i class="fa-solid fa-bolt"></i> Flash Messages & SweetAlert2</h4>
-                    <p>Pesan konfirmasi (Flash Session) yang muncul hanya sekali setelah tindakan berhasil. Kita akan mengintegrasikan <em>Library Eksternal</em> <strong>SweetAlert2</strong> agar notifikasi <em>"Data berhasil disimpan"</em> tampil elegan dalam bentuk pop-up interaktif alih-alih teks biasa.</p>
+
+                <!-- Global Errors -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Global Error List</h4>
+                    <p>Selain di bawah input, terkadang kita perlu menampilkan daftar semua error di bagian atas form untuk kemudahan membaca.</p>
+<pre style="margin-top: 10px;"><code>@if ($errors->any())
+    &lt;ul class="alert alert-danger"&gt;
+        @foreach ($errors->all() as $error)
+            &lt;li&gt;{{ $error }}&lt;/li&gt;
+        @endforeach
+    &lt;/ul&gt;
+@endif</code></pre>
                 </div>
             </div>
         </div>
