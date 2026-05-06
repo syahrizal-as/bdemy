@@ -748,6 +748,51 @@ function deleteProduct(id, name) {
             </div>
         </div>
 
+        <!-- Sesi Praktik: Project Mastery -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-teal"><i class="fa-solid fa-trophy"></i></div>
+                <h2>Sesi Praktik 2.6: Project Mastery (Advanced)</h2>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-main);">Tantangan tambahan untuk membangun logika aplikasi yang lebih matang dan interaktif.</p>
+            <div class="content-grid">
+                <!-- Live Search -->
+                <div class="card">
+                    <h4><span class="step-number">6</span> Pencarian & Filter Dinamis</h4>
+                    <p>Tambahkan input pencarian di atas tabel. Peserta harus memodifikasi Controller agar mendukung pencarian nama atau SKU.</p>
+<pre style="margin-top: 10px;"><code>$products = Product::when(request('search'), function($q) {
+    $q->where('name', 'like', '%'.request('search').'%');
+})->paginate(10);</code></pre>
+                </div>
+
+                <!-- Logic Warna Stok -->
+                <div class="card highlight">
+                    <h4><span class="step-number">7</span> Conditional UI (Badges)</h4>
+                    <p>Terapkan logika warna pada kolom stok untuk meningkatkan User Experience (UX).</p>
+<pre style="margin-top: 10px;"><code>@if($p->stock <= 10)
+    &lt;span class="badge bg-danger"&gt;Stok Kritis&lt;/span&gt;
+@elseif($p->stock <= 50)
+    &lt;span class="badge bg-warning"&gt;Menipis&lt;/span&gt;
+@else
+    &lt;span class="badge bg-success"&gt;Aman&lt;/span&gt;
+@endif</code></pre>
+                </div>
+
+                <!-- Transaction Log -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><span class="step-number">8</span> Advanced: Stock Transaction Log</h4>
+                    <p>Alih-alih mengedit stok secara langsung, buatlah sistem transaksi (Barang Masuk/Keluar). Setiap kali transaksi disimpan, stok produk akan ter-update otomatis menggunakan <strong>DB Transaction</strong> demi keamanan data.</p>
+<pre style="margin-top: 10px;"><code>DB::transaction(function() use ($request) {
+    $product = Product::find($request->product_id);
+    // Tambah/Kurang Stok
+    $product->increment('stock', $request->qty);
+    // Catat Riwayat
+    Transaction::create($request->all());
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
         <!-- Ringkasan Hari 2 -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
