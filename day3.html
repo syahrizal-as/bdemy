@@ -350,6 +350,50 @@ Distributed under the MIT License. See `LICENSE` for more information.</code></p
             </div>
         </div>
 
+        <!-- Sesi 3.3: Professional Standard & Deployment -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-teal"><i class="fa-solid fa-medal"></i></div>
+                <h2>Sesi 3.3: Professional Standard & Deployment</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Menstandarisasi kode Anda agar siap untuk lingkungan produksi dan kolaborasi tim.</p>
+            <div class="content-grid">
+                <!-- Conventional Commits -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-code-commit"></i> Conventional Commits</h4>
+                    <p>Jangan asal menulis pesan commit. Gunakan standar industri agar riwayat proyek mudah dibaca mesin dan manusia.</p>
+<pre style="margin-top:10px;"><code>feat: add excel export functionality
+fix: resolve stock calculation error
+docs: update installation steps in README
+style: format code using Laravel Pint</code></pre>
+                </div>
+
+                <!-- Laravel Pint -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-broom"></i> Laravel Pint (Zero Config)</h4>
+                    <p>Alat otomatis untuk merapikan gaya penulisan kode Anda (Linting) agar sesuai dengan standar PSR-12 tanpa perlu melakukannya manual.</p>
+<pre style="margin-top:10px;"><code>./vendor/bin/pint</code></pre>
+                </div>
+
+                <!-- Deployment Basics -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-cloud-arrow-up"></i> The Road to Production</h4>
+                    <p>Bagaimana cara membuat aplikasi ini online? Pahami opsi infrastruktur modern:</p>
+                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; padding-left: 20px;">
+                        <li><strong>Shared Hosting (cPanel):</strong> Murah & mudah, cocok untuk UKM.</li>
+                        <li><strong>VPS (DigitalOcean/AWS):</strong> Kontrol penuh, butuh keahlian Linux.</li>
+                        <li><strong>PaaS (Railway/Render):</strong> Otomatis deploy setiap kali Anda <code>git push</code>.</li>
+                    </ul>
+                </div>
+
+                <!-- GitHub Portfolio -->
+                <div class="card">
+                    <h4><i class="fa-brands fa-github-alt"></i> GitHub sebagai Portofolio</h4>
+                    <p>Optimalkan repositori Anda! Gunakan <strong>Shields.io</strong> untuk badge, tambahkan deskripsi proyek yang jelas, dan jangan lupa sertakan link demo jika ada.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Kolaborasi Git -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
@@ -416,18 +460,10 @@ php artisan tinker
                         <li>Daftar Fitur CRUD</li>
                     </ul>
                 </div>
-
-                <!-- Step 4: Case Study -->
-                <div class="card highlight" style="grid-column: 1 / -1;">
-                    <h4><span class="step-number">4</span> Studi Kasus: Hunt the Silent Bug</h4>
-                    <p>Coba temukan dan perbaiki kode di bawah ini yang tidak memunculkan error tapi datanya salah (Logic Error). Gunakan `dd()` untuk melacaknya!</p>
-<pre style="margin-top:10px;"><code>// Bug: Stok tidak berkurang saat barang keluar
-public function reduceStock($id, $qty) {
-    $product = Product::find($id);
-    // Ada yang salah di baris ini?
-    $product->stock = $product->stock + $qty; 
-    $product->save();
-}</code></pre>
+                <!-- Step 4: Formatting -->
+                <div class="card highlight">
+                    <h4><span class="step-number">4</span> Auto-Formatting (Laravel Pint)</h4>
+                    <p>Jalankan <code>./vendor/bin/pint</code> untuk merapikan seluruh file PHP Anda agar konsisten dengan standar PSR-12 secara otomatis.</p>
                 </div>
 
                 <!-- Step 5: Final Push -->
@@ -435,7 +471,7 @@ public function reduceStock($id, $qty) {
                     <h4><span class="step-number">5</span> Finalisasi & Version Control</h4>
                     <p>Lakukan commit terakhir dengan pesan yang mengikuti standar **Conventional Commits** (feat:, docs:, fix:).</p>
 <pre style="margin-top:10px;"><code>git add .
-git commit -m "docs: implement phpdoc and professional readme"
+git commit -m "docs: finalize professional readme and phpdoc documentation"
 git push origin main</code></pre>
                 </div>
             </div>
