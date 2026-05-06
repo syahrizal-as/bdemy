@@ -414,6 +414,54 @@
             </div>
         </div>
 
+        <!-- Eloquent & Security Best Practices -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-red"><i class="fa-solid fa-user-shield"></i></div>
+                <h2>Eloquent & Security Best Practices</h2>
+            </div>
+            <div class="content-grid">
+                <!-- Mass Assignment -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-lock"></i> Mass Assignment Protection</h4>
+                    <p>Laravel memblokir pengisian data massal secara default demi keamanan. Anda wajib mendaftarkan kolom yang boleh diisi di dalam Model.</p>
+<pre style="margin-top: 10px;"><code>// Di Models/Product.php
+protected $fillable = ['name', 'sku', 'price', 'stock'];</code></pre>
+                </div>
+
+                <!-- Route Model Binding -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-magic"></i> Route Model Binding</h4>
+                    <p>Keajaiban Laravel! Dengan mengetikkan Type-Hint Model di Controller, Laravel otomatis mencari data berdasarkan ID tanpa perlu <code>findOrFail()</code> manual.</p>
+<pre style="margin-top: 10px;"><code>public function edit(Product $product) {
+    return view('edit', compact('product'));
+}</code></pre>
+                </div>
+
+                <!-- Method Spoofing -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-server"></i> Method Spoofing</h4>
+                    <p>Browser HTML hanya mendukung <code>GET</code> dan <code>POST</code>. Laravel menggunakan "spoofing" untuk mensimulasikan rute <code>PUT</code> dan <code>DELETE</code> standar RESTful.</p>
+<pre style="margin-top: 10px;"><code>&lt;form action="..." method="POST"&gt;
+    @csrf
+    @method('PUT')
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <!-- Bootstrap Pagination -->
+                <div class="card highlight">
+                    <h4><i class="fa-brands fa-bootstrap"></i> Bootstrap Pagination</h4>
+                    <p>Agar navigasi halaman (links) tampil cantik dengan Bootstrap 5, jangan lupa daftarkan di <code>AppServiceProvider.php</code>.</p>
+<pre style="margin-top: 10px;"><code>// AppServiceProvider.php
+use Illuminate\Pagination\Paginator;
+
+public function boot() {
+    Paginator::useBootstrapFive();
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
         <!-- Praktik Sesi 2.1 -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
