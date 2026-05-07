@@ -360,36 +360,94 @@ Distributed under the MIT License. See `LICENSE` for more information.</code></p
             <div class="content-grid">
                 <!-- Conventional Commits -->
                 <div class="card highlight">
-                    <h4><i class="fa-solid fa-code-commit"></i> Conventional Commits</h4>
+                    <h4><i class="fa-solid fa-code-commit"></i> 1. Professional Standard</h4>
                     <p>Jangan asal menulis pesan commit. Gunakan standar industri agar riwayat proyek mudah dibaca mesin dan manusia.</p>
 <pre style="margin-top:10px;"><code>feat: add excel export functionality
 fix: resolve stock calculation error
 docs: update installation steps in README
 style: format code using Laravel Pint</code></pre>
-                </div>
-
-                <!-- Laravel Pint -->
-                <div class="card">
-                    <h4><i class="fa-solid fa-broom"></i> Laravel Pint (Zero Config)</h4>
-                    <p>Alat otomatis untuk merapikan gaya penulisan kode Anda (Linting) agar sesuai dengan standar PSR-12 tanpa perlu melakukannya manual.</p>
-<pre style="margin-top:10px;"><code>./vendor/bin/pint</code></pre>
-                </div>
-
-                <!-- Deployment Basics -->
-                <div class="card highlight">
-                    <h4><i class="fa-solid fa-cloud-arrow-up"></i> The Road to Production</h4>
-                    <p>Bagaimana cara membuat aplikasi ini online? Pahami opsi infrastruktur modern:</p>
-                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; padding-left: 20px;">
-                        <li><strong>Shared Hosting (cPanel):</strong> Murah & mudah, cocok untuk UKM.</li>
-                        <li><strong>VPS (DigitalOcean/AWS):</strong> Kontrol penuh, butuh keahlian Linux.</li>
-                        <li><strong>PaaS (Railway/Render):</strong> Otomatis deploy setiap kali Anda <code>git push</code>.</li>
-                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">Gunakan <strong>Laravel Pint</strong> untuk merapikan kode secara otomatis:</p>
+                    <code>./vendor/bin/pint</code>
                 </div>
 
                 <!-- GitHub Portfolio -->
                 <div class="card">
-                    <h4><i class="fa-brands fa-github-alt"></i> GitHub sebagai Portofolio</h4>
+                    <h4><i class="fa-brands fa-github-alt"></i> 2. GitHub Portfolio</h4>
                     <p>Optimalkan repositori Anda! Gunakan <strong>Shields.io</strong> untuk badge, tambahkan deskripsi proyek yang jelas, dan jangan lupa sertakan link demo jika ada.</p>
+                    <p style="margin-top: 5px; font-size: 0.9rem; color: var(--accent);">HRD akan melihat kualitas koding Anda melalui GitHub, bukan hanya CV.</p>
+                </div>
+
+                <!-- Shared Hosting Deployment -->
+                <div class="card highlight" style="grid-column: 1 / -1;">
+                    <h4><i class="fa-solid fa-server"></i> 3. Deployment: Shared Hosting (cPanel)</h4>
+                    <p style="margin-bottom: 15px;">Metode termurah dan paling umum digunakan untuk UKM atau proyek skala kecil.</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px;">
+                            <strong style="color: var(--primary-light);">Tahap 1: Persiapan Lokal</strong>
+                            <ul style="font-size: 0.85rem; padding-left: 15px; margin-top: 5px; color: var(--text-muted);">
+                                <li>Jalankan <code>npm run build</code> (jika pakai Vite).</li>
+                                <li>Kompres semua file proyek menjadi <strong>ZIP</strong> (Kecuali folder <code>node_modules</code>).</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px;">
+                            <strong style="color: var(--primary-light);">Tahap 2: Upload & Struktur</strong>
+                            <ul style="font-size: 0.85rem; padding-left: 15px; margin-top: 5px; color: var(--text-muted);">
+                                <li>Upload ZIP ke File Manager cPanel.</li>
+                                <li>Ekstrak di luar folder <code>public_html</code> (untuk keamanan).</li>
+                                <li>Pindahkan isi folder <code>public</code> aplikasi ke dalam <code>public_html</code>.</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px;">
+                            <strong style="color: var(--primary-light);">Tahap 3: Konfigurasi</strong>
+                            <ul style="font-size: 0.85rem; padding-left: 15px; margin-top: 5px; color: var(--text-muted);">
+                                <li>Edit <code>index.php</code>, sesuaikan path ke <code>vendor/autoload.php</code>.</li>
+                                <li>Setup Database di MySQL Databases cPanel & update <code>.env</code>.</li>
+                                <li>Gunakan PHP Version 8.2+ di Select PHP Version.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VPS Deployment -->
+                <div class="card highlight" style="grid-column: 1 / -1; border-left-color: var(--grad-purple);">
+                    <h4><i class="fa-solid fa-terminal"></i> 4. Deployment: VPS (Ubuntu + Nginx)</h4>
+                    <p style="margin-bottom: 15px;">Metode profesional dengan kontrol penuh menggunakan SSH dan Git.</p>
+                    
+                    <div class="step-title" style="color: var(--primary-light); font-weight: 600; margin-bottom: 10px;"><span class="step-number" style="width: 25px; height: 25px; font-size: 0.8rem;">1</span> Setup Server (Initial)</div>
+                    <code>ssh root@ip_server_anda
+apt update && apt upgrade
+apt install nginx mysql-server php8.2-fpm php8.2-mysql git unzip</code>
+
+                    <div class="step-title" style="color: var(--primary-light); font-weight: 600; margin: 15px 0 10px;"><span class="step-number" style="width: 25px; height: 25px; font-size: 0.8rem;">2</span> Clone & Install Project</div>
+                    <code>cd /var/www
+git clone https://github.com/username/larastock.git
+cd larastock
+composer install --optimize-autoloader --no-dev
+cp .env.example .env && php artisan key:generate</code>
+
+                    <div class="step-title" style="color: var(--primary-light); font-weight: 600; margin: 15px 0 10px;"><span class="step-number" style="width: 25px; height: 25px; font-size: 0.8rem;">3</span> Permissions & Symlink</div>
+                    <code>chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+php artisan storage:link</code>
+
+                    <div class="step-title" style="color: var(--primary-light); font-weight: 600; margin: 15px 0 10px;"><span class="step-number" style="width: 25px; height: 25px; font-size: 0.8rem;">4</span> Nginx Configuration</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Buat file config di <code>/etc/nginx/sites-available/larastock</code>:</p>
+<pre style="font-size: 0.8rem;"><code>server {
+    listen 80;
+    server_name domainanda.com;
+    root /var/www/larastock/public;
+    index index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+    }
+}</code></pre>
                 </div>
             </div>
         </div>
