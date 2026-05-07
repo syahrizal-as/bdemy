@@ -535,6 +535,100 @@ git push origin main</code></pre>
             </div>
         </div>
 
+        <!-- Sesi 3.4: Security & Performance Optimization -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-red"><i class="fa-solid fa-shield-virus"></i></div>
+                <h2>Sesi 3.4: Security & Performance Optimization</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Membangun aplikasi yang tidak hanya jalan, tapi juga aman dan kencang.</p>
+            <div class="content-grid">
+                <!-- Security -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-user-shield"></i> Security Deep Dive</h4>
+                    <p>Memahami bagaimana Laravel melindungi Anda secara otomatis, dan apa yang harus Anda jaga manual.</p>
+                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; padding-left: 20px;">
+                        <li><strong>Mass Assignment:</strong> Mengapa <code>$fillable</code> sangat penting?</li>
+                        <li><strong>SQL Injection:</strong> Bahaya menggunakan <code>DB::raw()</code> tanpa parameter binding.</li>
+                        <li><strong>XSS Attack:</strong> Perbedaan antara <code>{{ $data }}</code> dan <code>{!! $data !!}</code>.</li>
+                        <li><strong>File Upload Security:</strong> Selalu validasi <code>mimes</code> (jpg, png, pdf) dan <code>max</code> size untuk mencegah upload shell script/malware.</li>
+                    </ul>
+                    <code style="margin-top: 10px;">'file' => 'mimes:jpg,png,pdf|max:2048'</code>
+                </div>
+
+                <!-- Optimization -->
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-gauge-high"></i> Menghindari N+1 Query</h4>
+                    <p>Masalah paling umum yang membuat aplikasi Laravel lambat saat data sudah mencapai ribuan.</p>
+<pre style="margin-top:10px;"><code>// ❌ SALAH: Memicu puluhan kueri database
+$products = Product::all(); 
+
+// ✅ BENAR: Hanya 2 kueri database (Eager Loading)
+$products = Product::with('category')->get();</code></pre>
+                </div>
+
+                <!-- Validation as Security -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-filter"></i> Validasi sebagai Pertahanan</h4>
+                    <p>Jangan pernah percaya input user. Gunakan validasi yang ketat (<code>exists</code>, <code>unique</code>, <code>mimes</code>) untuk mencegah data sampah masuk ke server.</p>
+                </div>
+
+                <!-- Caching Basics -->
+                <div class="card">
+                    <h4><i class="fa-solid fa-bolt"></i> Database Indexing</h4>
+                    <p>Belajar cara menambahkan <code>$table->index('nama_kolom')</code> pada migrasi untuk mempercepat pencarian data hingga 100x lipat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesi 3.5: Soft Skills & Troubleshooting Mindset -->
+        <div class="section glass-panel fade-in-up">
+            <div class="section-title">
+                <div class="icon icon-blue"><i class="fa-solid fa-comments"></i></div>
+                <h2>Sesi 3.5: Soft Skills & Developer Productivity</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4><i class="fa-solid fa-magnifying-glass"></i> Reading Documentation</h4>
+                    <p>Kemampuan terpenting seorang developer bukan menghafal kode, tapi tahu <strong>di mana mencari jawaban</strong> di dokumentasi resmi.</p>
+                </div>
+                <div class="card highlight">
+                    <h4><i class="fa-solid fa-circle-question"></i> How to Ask for Help</h4>
+                    <p>Belajar cara bertanya yang efektif di GitHub/StackOverflow: Sertakan versi Laravel, potongan kode, dan pesan error yang lengkap (minimal 15 menit riset sendiri sebelum bertanya).</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fa-solid fa-list-check"></i> Task Management</h4>
+                    <p>Mengenal konsep <strong>Scrum/Kanban</strong> sederhana. Pecah fitur besar menjadi tugas-tugas kecil yang bisa diselesaikan dalam hitungan jam.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workshop: Real-world Scenario Challenge -->
+        <div class="section glass-panel fade-in-up" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
+            <div class="section-title">
+                <div class="icon icon-green"><i class="fa-solid fa-laptop-code"></i></div>
+                <h2>Interactive Workshop: Real-world Challenges</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Simulasi kasus nyata yang sering terjadi di dunia kerja (Durasi: 2-3 Jam).</p>
+            <div class="content-grid">
+                <!-- Challenge 1 -->
+                <div class="card">
+                    <h4 style="color: var(--accent);"><i class="fa-solid fa-fire"></i> Challenge A: "Sistem Melambat"</h4>
+                    <p>Aplikasi LaraStock mendadak lambat saat menampilkan 500 transaksi. Peserta harus mengidentifikasi N+1 query dan memperbaikinya menggunakan Eager Loading.</p>
+                </div>
+                <!-- Challenge 2 -->
+                <div class="card">
+                    <h4 style="color: var(--accent);"><i class="fa-solid fa-user-slash"></i> Challenge B: "Security Audit"</h4>
+                    <p>Terdapat celah di mana user bisa mengubah harga barang milik user lain. Peserta harus memperbaiki <code>ProductController</code> menggunakan <strong>Policy</strong> atau pengecekan <code>auth()->id()</code>.</p>
+                </div>
+                <!-- Challenge 3 -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h4 style="color: var(--accent);"><i class="fa-solid fa-code-pull-request"></i> Challenge C: "Team Collaboration"</h4>
+                    <p>Peserta bekerja berpasangan. Satu orang membuat fitur "Diskon Produk", satu lagi membuat "Stok Kritis". Mereka harus melakukan <strong>Git Merge</strong> dan menyelesaikan <strong>Merge Conflict</strong> secara manual.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- The AI Era: Future Career & Challenges -->
         <div class="section glass-panel fade-in-up">
             <div class="section-title">
