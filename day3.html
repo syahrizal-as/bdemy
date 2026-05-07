@@ -607,24 +607,54 @@ $products = Product::with('category')->get();</code></pre>
         <div class="section glass-panel fade-in-up" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
             <div class="section-title">
                 <div class="icon icon-green"><i class="fa-solid fa-laptop-code"></i></div>
-                <h2>Interactive Workshop: Real-world Challenges</h2>
+                <h2>Interactive Workshop: Professional Challenges</h2>
             </div>
-            <p style="margin-bottom: 20px; color: var(--text-muted);">Simulasi kasus nyata yang sering terjadi di dunia kerja (Durasi: 2-3 Jam).</p>
-            <div class="content-grid">
-                <!-- Challenge 1 -->
-                <div class="card">
-                    <h4 style="color: var(--accent);"><i class="fa-solid fa-fire"></i> Challenge A: "Sistem Melambat"</h4>
-                    <p>Aplikasi LaraStock mendadak lambat saat menampilkan 500 transaksi. Peserta harus mengidentifikasi N+1 query dan memperbaikinya menggunakan Eager Loading.</p>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Selesaikan tantangan berikut berdasarkan skenario dunia kerja nyata. (Estimasi: 3 Jam).</p>
+            
+            <div class="content-grid" style="grid-template-columns: 1fr;">
+                <!-- Challenge 1: Performance -->
+                <div class="card highlight" style="border-left-color: var(--accent);">
+                    <h4 style="color: var(--accent);"><i class="fa-solid fa-gauge-high"></i> Case A: "Aplikasi Terasa Berat" (Performance)</h4>
+                    <p style="color: var(--text-main); margin-bottom: 10px;"><strong>Skenario:</strong> User melaporkan bahwa halaman Riwayat Transaksi memakan waktu lebih dari 5 detik untuk loading saat data mencapai 100 baris.</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; font-size: 0.9rem;">
+                        <strong style="color: var(--primary-light);">Tugas Anda:</strong>
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Identifikasi masalah <strong>N+1 Query</strong> pada file <code>TransactionController</code>.</li>
+                            <li>Gunakan method <code>with(['relation_name'])</code> untuk melakukan Eager Loading.</li>
+                            <li>Tambahkan <strong>Pagination</strong> (10 data per halaman) agar beban server berkurang.</li>
+                            <li>Verifikasi: Pastikan jumlah kueri database berkurang drastis (cek via Laravel Telescope atau debug manual).</li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- Challenge 2 -->
-                <div class="card">
-                    <h4 style="color: var(--accent);"><i class="fa-solid fa-user-slash"></i> Challenge B: "Security Audit"</h4>
-                    <p>Terdapat celah di mana user bisa mengubah harga barang milik user lain. Peserta harus memperbaiki <code>ProductController</code> menggunakan <strong>Policy</strong> atau pengecekan <code>auth()->id()</code>.</p>
+
+                <!-- Challenge 2: Security -->
+                <div class="card highlight" style="border-left-color: var(--grad-red);">
+                    <h4 style="color: #ef4444;"><i class="fa-solid fa-biohazard"></i> Case B: "Celah Keamanan Upload" (Security)</h4>
+                    <p style="color: var(--text-main); margin-bottom: 10px;"><strong>Skenario:</strong> Hacker mencoba mengunggah file <code>script.php</code> melalui form "Foto Produk" untuk mengambil alih server.</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; font-size: 0.9rem;">
+                        <strong style="color: var(--primary-light);">Tugas Anda:</strong>
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Perketat validasi pada <code>ProductRequest</code> atau Controller.</li>
+                            <li>Wajibkan file hanya boleh bertipe <code>jpg, png, webp</code>.</li>
+                            <li>Batasi ukuran maksimal file menjadi <strong>1 MB</strong>.</li>
+                            <li>Ubah nama file yang diunggah menggunakan <code>time() . '-' . uniqid()</code> agar tidak bisa ditebak oleh hacker.</li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- Challenge 3 -->
-                <div class="card" style="grid-column: 1 / -1;">
-                    <h4 style="color: var(--accent);"><i class="fa-solid fa-code-pull-request"></i> Challenge C: "Team Collaboration"</h4>
-                    <p>Peserta bekerja berpasangan. Satu orang membuat fitur "Diskon Produk", satu lagi membuat "Stok Kritis". Mereka harus melakukan <strong>Git Merge</strong> dan menyelesaikan <strong>Merge Conflict</strong> secara manual.</p>
+
+                <!-- Challenge 3: Teamwork -->
+                <div class="card highlight" style="border-left-color: var(--grad-purple);">
+                    <h4 style="color: #8b5cf6;"><i class="fa-solid fa-code-merge"></i> Case C: "The Merge Conflict" (Collaboration)</h4>
+                    <p style="color: var(--text-main); margin-bottom: 10px;"><strong>Skenario:</strong> Anda dan rekan kerja mengedit file <code>web.php</code> yang sama di baris yang sama secara bersamaan.</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; font-size: 0.9rem;">
+                        <strong style="color: var(--primary-light);">Tugas Anda (Bekerja Berpasangan):</strong>
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li><strong>Siswa 1:</strong> Buat branch <code>fitur-diskon</code>, edit baris 10 di <code>web.php</code>, lalu push & merge.</li>
+                            <li><strong>Siswa 2:</strong> Buat branch <code>fitur-kupon</code>, edit baris 10 di <code>web.php</code> (teks berbeda), lalu coba push & merge.</li>
+                            <li>Hadapi <strong>CONFLICT</strong> yang muncul di VS Code.</li>
+                            <li>Selesaikan konflik secara manual (pilih kode mana yang mau dipakai atau gabungkan keduanya).</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
